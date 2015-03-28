@@ -1,0 +1,28 @@
+{
+  "name": "glsl-transition-vignette-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo index.js --live",
+    "build": "browserify index.js | uglifyjs -c -m > build.js"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^4.7.16",
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3",
+    "budo": "^1.0.0"
+  },
+  "dependencies": {
+    "glsl-transition-vignette": "^0.1.2",
+    "glsl-transitions": "^2015.3.28",
+    "react": "^0.13.1"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "glsl-transition-vignette-grid",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "renders a grid of glsl-transition-vignette efficiently (cached + pull of WebGL canvas)",
   "main": "VignetteGrid.js",
   "peerDependencies": {

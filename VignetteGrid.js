@@ -44,7 +44,7 @@ var VignetteGrid = React.createClass({
     transitions: PropTypes.array.isRequired,
 
     /**
-     * renderVignette: (props) => <Vignette {...props} /> element
+     * renderVignette: (props, transition) => <Vignette {...props} /> element
      * You should give props to Vignette. You can enhance them.
      */
     renderVignette: PropTypes.func,
@@ -63,7 +63,7 @@ var VignetteGrid = React.createClass({
     return {
       style: {},
       vignetteMargin: 0,
-      renderVignette: (props) => <Vignette {...props} />,
+      renderVignette: props => <Vignette {...props} />,
       cache: {
         resolution: 64,
         delay: 30
@@ -136,7 +136,7 @@ var VignetteGrid = React.createClass({
         name: transition.name,
         owner: transition.owner,
         cache: cacheConfig
-      });
+      }, transition);
     });
 
     return <div style={style}>{items}</div>;

@@ -63,6 +63,7 @@ var VignetteGrid = React.createClass({
     return {
       style: {},
       vignetteMargin: 0,
+      dpr: window.devicePixelRatio || 1,
       renderVignette: props => <Vignette {...props} />,
       cache: {
         resolution: 64,
@@ -72,8 +73,8 @@ var VignetteGrid = React.createClass({
   },
 
   componentWillMount() {
-    const { transitions, vignetteWidth, vignetteHeight } = this.props;
-    this.cache = SharedCanvas.create(vignetteWidth, vignetteHeight);
+    const { transitions, vignetteWidth, vignetteHeight, dpr } = this.props;
+    this.cache = SharedCanvas.create(vignetteWidth, vignetteHeight, dpr);
     transitions.forEach(t => this.cache.createTransitionDrawer(t.id, t.glsl, t.uniforms));
   },
 
@@ -83,7 +84,16 @@ var VignetteGrid = React.createClass({
   },
 
   componentWillUpdate (nextProps) {
-    if (nextProps.transitions !== this.props.transitions) {
+    const {
+      transitions,
+      width,
+      height,
+      dpr
+    } = this.props;
+    if (nextProps.dpr !== dpr || nextProps.width !== width || nextProps.height !== height) {
+      this.cache.resize(nextProps.width, nextProps.height, nextProps.dpr);
+    }
+    if (nextProps.transitions !== transitions) {
       var cache = this.cache;
       var data = nextProps.transitions;
       var beforeIds = cache.getAllIds();
@@ -107,7 +117,8 @@ var VignetteGrid = React.createClass({
       vignetteMargin,
       vignetteWidth,
       vignetteHeight,
-      cache
+      cache,
+      dpr
     } = this.props;
 
     const vignetteMarginCSS =
@@ -128,6 +139,7 @@ var VignetteGrid = React.createClass({
         },
         width: vignetteWidth,
         height: vignetteHeight,
+        dpr: dpr,
         images: images,
         glsl: transition.glsl,
         uniforms: transition.uniforms,

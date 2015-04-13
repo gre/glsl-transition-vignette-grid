@@ -21,7 +21,7 @@
     "react-component"
   ],
   "author": "Gaëtan Renaudeau",
-  "license": "ISC",
+  "license": "GPLv3",
   "bugs": {
     "url": "https://github.com/glslio/glsl-transition-vignette-grid/issues"
   },
